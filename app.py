@@ -7,7 +7,7 @@ import time  # Import time for sleep function
 app = Flask(__name__)
 
 # Load API keys from environment variables
-openai_api_key = 'sk-proj-JcfaXUWJErL8rBJzzH0xT3BlbkFJRXKtdKg473mjo6sIW2vV'
+openai_api_key = OPENAI_API_KEY
 eleven_labs_api_key = 'be139e9eae02754205b8d93b2859e279'
 
 if not openai_api_key or not eleven_labs_api_key:
