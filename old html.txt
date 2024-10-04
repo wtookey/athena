@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athena</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> -->
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"> -->
+             <img src="logo.png" alt="Logo">
+            <h1>Athena</h1>
+        </div>
+        <!-- <div class="search-bar"> -->
+            <!-- <input type="text" id="topic-input" placeholder="Enter a Topic"> -->
+            <!-- <form action="/generate" method="post">
+                <label for="topic"></label>
+                <input type="text" id="topic" placeholder="Enter a Topic" name="topic" required>
+                <button type="submit">Generate</button>
+            </form>
+        </div> -->
+        <div class="topic-box">
+        <div class="inputs">
+            <input type="text" placeholder="Enter a Topic" class="topic-input" />
+            <div class="dropdowns">
+              <select class="dropdown" id="qualification">
+                <option disabled selected>Qualification</option>
+                <option value="alevel">A Level</option>
+                <option value="gcse">GCSE</option>
+              </select>
+              <select class="dropdown" id="exam-board">
+                <option disabled selected>Exam Board</option>
+                <option value="aqa">AQA</option>
+                <option value="ocr">OCR</option>
+                <option value="edexcel">Edexcel</option>
+              </select>
+              <select class="dropdown" id="subject">
+                <option disabled selected>Subject</option>
+                <option value="english">English</option>
+                <option value="history">History</option>
+                <option value="philosophy">Philosophy</option>
+              </select>
+            </div>
+        </div>
+            <button class="generate-btn">Generate</button>
+          </div>
+          
+        <div class="history-container">
+            <div class="history-section">
+                <h2>History</h2>
+                <div class="history-item">
+                    <button class="play-button"> <img src="play.svg" alt=""></button>
+                    <div class="title-progressbar">
+                        <div class="details">
+                            <div class="title-date">
+                            <h1 class="title">The Rise and Fall of the Roman Empire</h1>
+                            <h2 class="date">23/07/24</h2>   
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 70%;"></div>
+                            </div>
+                            <h2 class="time">15:21</h2>
+                        </div>
+                    </div>
+                    <div class="right">
+                    
+                        <div class="icons">
+                            <button class="download-button"> <img src="download.svg" alt=""></button>
+                            <button class="share-button"> <img src="share.svg" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            
+                </div>
+        </div>
+    </div>
+
+
+</body>
+

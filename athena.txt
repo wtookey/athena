@@ -1,0 +1,61 @@
+from openai import OpenAI
+
+client = OpenAI(api_key='sk-proj-JcfaXUWJErL8rBJzzH0xT3BlbkFJRXKtdKg473mjo6sIW2vV')
+import requests
+import json
+import time
+
+# Set up your OpenAI and Eleven Labs API keys
+openai_api_key = 'sk-proj-JcfaXUWJErL8rBJzzH0xT3BlbkFJRXKtdKg473mjo6sIW2vV'
+eleven_labs_api_key = 'be139e9eae02754205b8d93b2859e279'
+
+
+def generate_transcript(topic):
+    prompt = f"Create a podcast transcript about {topic}."
+    response = client.chat.completions.create(model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a podcast generator. You will be given a topic and you will generate a transcript for the podcast on the given topic. The podcast should be in a monologue format. In your response you should include only text that is meant to be spoken (i.e. no 'host' and no '[Theme Song'). "},
+        {"role": "user", "content": prompt}
+    ],
+    max_tokens=4000)
+    return response.choices[0].message.content
+
+def text_to_speech(text):
+
+    CHUNK_SIZE = 1024  # Size of chunks to read/write at a time
+    VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"  # ID of the voice model to use
+    OUTPUT_PATH = "output.mp3"  # Path to save the output audio file
+
+    tts_url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/stream"
+
+    headers = {
+        'Accept': 'application/json',
+        "xi-api-key": eleven_labs_api_key,
+    }
+    data = {
+        "text": text,
+        "model_id": "eleven_multilingual_v2",
+    }
+    response = requests.post(tts_url, headers=headers, json=data, stream=True)
+
+    if response.ok:
+        with open('podcast.mp3', 'wb') as f:
+            for chunk in response.iter_content(chunk_size=CHUNK_SIZE):
+                f.write(chunk)
+        return 'podcast.mp3'
+    else:
+        print(f"Error: {response.status_code}, {response.text}")
+        return None
+
+def main():
+    topic = input("Enter the podcast topic: ")
+    transcript = generate_transcript(topic)
+
+    audio_file = text_to_speech(transcript)
+    if audio_file:
+        print(f"Podcast audio saved as {audio_file}")
+    else:
+        print("Failed to generate podcast audio.")
+
+if __name__ == "__main__":
+    main()
